@@ -23,6 +23,6 @@ public class StudentController {
     @DeleteMapping("students/{id}")
     @ResponseStatus(HttpStatus.OK)
     public void deleteStudent(@PathVariable Integer id) {
-        return;
+        studentService.deleteStudentById(id);
     }
 }
