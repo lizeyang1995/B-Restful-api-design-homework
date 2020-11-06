@@ -30,12 +30,22 @@ public class StudentService {
         students.remove(id);
     }
 
-    public List<Student> getStudents(String gender) {
+    public List<Student> getStudents(String gender, Integer id) {
         if (Optional.ofNullable(gender).isPresent()) {
             return getStudentsByGender(gender);
         }
+        if (Optional.ofNullable(id).isPresent()) {
+            return getStudentById(id);
+        }
         Collection<Student> studentsValues = students.values();
         return new ArrayList<>(studentsValues);
+    }
+
+    private List<Student> getStudentById(Integer id) {
+        if (!students.containsKey(id)) {
+            throw new RequestIdNotFound("要查找的id不存在");
+        }
+        return Collections.singletonList(students.get(id));
     }
 
     private List<Student> getStudentsByGender(String gender) {
