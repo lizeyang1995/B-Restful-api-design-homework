@@ -55,10 +55,10 @@ public class StudentService {
     }
 
     private List<Student> getStudentsByGender(String gender) {
-        ArrayList<Student> genderStudents = new ArrayList<>();
+        List<Student> genderStudents = new ArrayList<>();
         for (Map.Entry<Integer, Student> entry : students.entrySet()) {
             Student student = entry.getValue();
-            if (student.getGender().equals("male")) {
+            if (student.getGender().equals(gender)) {
                 genderStudents.add(student);
             }
         }
