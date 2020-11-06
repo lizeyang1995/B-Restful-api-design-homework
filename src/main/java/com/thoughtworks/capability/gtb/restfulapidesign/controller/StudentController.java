@@ -1,5 +1,6 @@
 package com.thoughtworks.capability.gtb.restfulapidesign.controller;
 
+import com.thoughtworks.capability.gtb.restfulapidesign.domain.Group;
 import com.thoughtworks.capability.gtb.restfulapidesign.domain.Student;
 import com.thoughtworks.capability.gtb.restfulapidesign.service.StudentService;
 import org.springframework.http.HttpStatus;
@@ -39,5 +40,11 @@ public class StudentController {
     @ResponseStatus(HttpStatus.OK)
     public Student modifyStudentInformation(@RequestBody Student student, @PathVariable Integer id) {
         return studentService.modifyStudent(student, id);
+    }
+
+    @PostMapping("students/groups/v1")
+    @ResponseStatus(HttpStatus.CREATED)
+    public List<Group> getGroups() {
+        return null;
     }
 }
