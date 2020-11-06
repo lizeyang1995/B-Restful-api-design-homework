@@ -76,4 +76,18 @@ public class StudentControllerTest {
                 .andExpect(jsonPath("$[0].id", is(2)))
                 .andExpect(status().isOk());
     }
+
+    @Test
+    @Order(7)
+    void should_modify_student_by_id() throws Exception {
+        Student student = Student.builder().name("lizeyang3.5").gender("male").note("1234").build();
+        ObjectMapper objectMapper = new ObjectMapper();
+        String jsonStudent = objectMapper.writeValueAsString(student);
+        mockMvc.perform(put("/students/3/v1").contentType(MediaType.APPLICATION_JSON).content(jsonStudent))
+                .andExpect(jsonPath("$.name", is("lizeyang3.5")))
+                .andExpect(jsonPath("$.gender", is("male")))
+                .andExpect(jsonPath("$.note", is("1234")))
+                .andExpect(jsonPath("$.id", is(3)))
+                .andExpect(status().isOk());
+    }
 }
