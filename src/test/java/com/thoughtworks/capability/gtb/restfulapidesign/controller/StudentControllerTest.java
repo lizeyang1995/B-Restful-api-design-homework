@@ -50,4 +50,11 @@ public class StudentControllerTest {
                 .andExpect(jsonPath("$", hasSize(4)))
                 .andExpect(status().isOk());
     }
+
+    @Test
+    void should_get_all_male_student() throws Exception {
+        mockMvc.perform(get("/students?gender=male"))
+                .andExpect(jsonPath("$", hasSize(2)))
+                .andExpect(status().isOk());
+    }
 }
