@@ -13,8 +13,10 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
+import static org.hamcrest.Matchers.is;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @SpringBootTest
@@ -44,6 +46,8 @@ public class StudentControllerTest {
     @Order(3)
     void should_delete_student_fail_when_give_not_exists_id() throws Exception {
         mockMvc.perform(delete("/students/100"))
+                .andExpect(jsonPath("$.code", is(404)))
+                .andExpect(jsonPath("$.message", is("要删除的id不存在")))
                 .andExpect(status().isNotFound());
     }
 }
