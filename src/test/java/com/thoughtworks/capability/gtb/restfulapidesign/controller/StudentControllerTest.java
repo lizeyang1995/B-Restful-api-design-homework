@@ -79,6 +79,15 @@ public class StudentControllerTest {
 
     @Test
     @Order(7)
+    void should_get_student_fail_when_id_not_exists() throws Exception {
+        mockMvc.perform(get("/students?id=100"))
+                .andExpect(jsonPath("$.code", is(404)))
+                .andExpect(jsonPath("$.message", is("要查找的id不存在")))
+                .andExpect(status().isNotFound());
+    }
+
+    @Test
+    @Order(8)
     void should_modify_student_by_id() throws Exception {
         Student student = Student.builder().name("lizeyang3.5").gender("male").note("1234").build();
         ObjectMapper objectMapper = new ObjectMapper();
