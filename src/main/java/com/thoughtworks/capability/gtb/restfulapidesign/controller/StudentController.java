@@ -30,7 +30,7 @@ public class StudentController {
         studentService.deleteStudentById(id);
     }
 
-    @GetMapping("students")
+    @GetMapping("students/v1")
     @ResponseStatus(HttpStatus.OK)
     public List<Student> getStudents(@RequestParam(required = false) String gender, @RequestParam(required = false) Integer id) {
         return studentService.getStudents(gender, id);

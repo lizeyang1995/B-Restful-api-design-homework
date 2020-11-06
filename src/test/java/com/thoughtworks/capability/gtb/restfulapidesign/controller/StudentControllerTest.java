@@ -52,7 +52,7 @@ public class StudentControllerTest {
     @Test
     @Order(4)
     void should_get_all_student() throws Exception {
-        mockMvc.perform(get("/students"))
+        mockMvc.perform(get("/students/v1"))
                 .andExpect(jsonPath("$", hasSize(7)))
                 .andExpect(status().isOk());
     }
@@ -60,7 +60,7 @@ public class StudentControllerTest {
     @Test
     @Order(5)
     void should_get_all_male_student() throws Exception {
-        mockMvc.perform(get("/students?gender=male"))
+        mockMvc.perform(get("/students/v1?gender=male"))
                 .andExpect(jsonPath("$", hasSize(2)))
                 .andExpect(status().isOk());
     }
@@ -68,7 +68,7 @@ public class StudentControllerTest {
     @Test
     @Order(6)
     void should_get_student_by_id() throws Exception {
-        mockMvc.perform(get("/students?id=2"))
+        mockMvc.perform(get("/students/v1?id=2"))
                 .andExpect(jsonPath("$[0].name", is("lizeyang2")))
                 .andExpect(jsonPath("$[0].gender", is("male")))
                 .andExpect(jsonPath("$[0].note", is("123")))
@@ -79,7 +79,7 @@ public class StudentControllerTest {
     @Test
     @Order(7)
     void should_get_student_fail_when_id_not_exists() throws Exception {
-        mockMvc.perform(get("/students?id=100"))
+        mockMvc.perform(get("/students/v1?id=100"))
                 .andExpect(jsonPath("$.code", is(404)))
                 .andExpect(jsonPath("$.message", is("要查找的id不存在")))
                 .andExpect(status().isNotFound());
