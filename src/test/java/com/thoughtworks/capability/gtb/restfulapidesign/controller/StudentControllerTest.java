@@ -39,4 +39,11 @@ public class StudentControllerTest {
         mockMvc.perform(delete("/students/1"))
                 .andExpect(status().isOk());
     }
+
+    @Test
+    @Order(3)
+    void should_delete_student_fail_when_give_not_exists_id() throws Exception {
+        mockMvc.perform(delete("/students/100"))
+                .andExpect(status().isNotFound());
+    }
 }
