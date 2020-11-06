@@ -65,4 +65,12 @@ public class StudentControllerTest {
                 .andExpect(jsonPath("$", hasSize(1)))
                 .andExpect(status().isOk());
     }
+
+    @Test
+    @Order(6)
+    void should_get_student_by_id() throws Exception {
+        mockMvc.perform(get("/students?id=2"))
+                .andExpect(jsonPath("$", hasSize(1)))
+                .andExpect(status().isOk());
+    }
 }
