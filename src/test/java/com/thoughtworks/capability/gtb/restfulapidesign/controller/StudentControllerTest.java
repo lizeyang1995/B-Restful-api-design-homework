@@ -38,7 +38,7 @@ public class StudentControllerTest {
     @Order(2)
     void should_delete_student_success() throws Exception {
         mockMvc.perform(delete("/students/1/v1"))
-                .andExpect(status().isOk());
+                .andExpect(status().isNoContent());
     }
 
     @Test

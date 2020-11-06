@@ -24,7 +24,7 @@ public class StudentController {
     }
 
     @DeleteMapping("students/{id}/v1")
-    @ResponseStatus(HttpStatus.OK)
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteStudent(@PathVariable Integer id) {
         studentService.deleteStudentById(id);
     }
