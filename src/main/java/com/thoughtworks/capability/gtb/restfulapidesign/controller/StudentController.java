@@ -51,6 +51,6 @@ public class StudentController {
     @PatchMapping("students/groups/{id}/v1")
     @ResponseStatus(HttpStatus.CREATED)
     public Group modifyGroupInformation(@PathVariable Integer id, @RequestParam String name) {
-        return null;
+        return studentService.modifyGroup(id, name);
     }
 }

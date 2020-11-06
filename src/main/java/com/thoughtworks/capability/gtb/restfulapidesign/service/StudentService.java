@@ -85,7 +85,6 @@ public class StudentService {
     private List<Group> randomGrouping(int studentSize, List<Student> students, List<Integer> randomNumber) {
         int commonSize = studentSize / GROUP_COUNTS;
         int restCount = studentSize % GROUP_COUNTS;
-        List<Group> result = new ArrayList<>();
         int count = 0;
         for (int i = 0; i < GROUP_COUNTS; i++) {
             Group group = new Group();
@@ -93,13 +92,16 @@ public class StudentService {
                 group.getStudents().add(students.get(randomNumber.get(count)));
                 count++;
             }
-            result.add(group);
+            group.setId(i + 1);
+            group.setName("Group" + (i + 1 + ""));
+            group.setNote("Group" + (i + 1 + ""));
+            groups.add(group);
         }
         for (int i = 0; i < restCount; i++) {
-            result.get(i).getStudents().add(students.get(randomNumber.get(count)));
+            groups.get(i).getStudents().add(students.get(randomNumber.get(count)));
             count++;
         }
-        return result;
+        return groups;
     }
 
     private List<Integer> getRandomNumber(int studentSize, int start, int end) {
@@ -112,5 +114,10 @@ public class StudentService {
             }
         }
         return numbers;
+    }
+
+    public Group modifyGroup(Integer id, String name) {
+        groups.get(id - 1).setName(name);
+        return groups.get(id - 1);
     }
 }
