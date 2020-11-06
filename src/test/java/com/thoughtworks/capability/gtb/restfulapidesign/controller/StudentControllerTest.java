@@ -98,4 +98,12 @@ public class StudentControllerTest {
                 .andExpect(jsonPath("$.id", is(3)))
                 .andExpect(status().isOk());
     }
+
+    @Test
+    @Order(9)
+    void should_get_all_groups() throws Exception {
+        mockMvc.perform(post("/students/groups/v1"))
+                .andExpect(jsonPath("$", hasSize(6)))
+                .andExpect(status().isCreated());
+    }
 }
