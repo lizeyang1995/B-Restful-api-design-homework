@@ -31,21 +31,21 @@ public class StudentControllerTest {
         Student student = Student.builder().name("lizeyang").gender("male").note("123").build();
         ObjectMapper objectMapper = new ObjectMapper();
         String jsonStudent = objectMapper.writeValueAsString(student);
-        mockMvc.perform(post("/students").content(jsonStudent).contentType(MediaType.APPLICATION_JSON))
+        mockMvc.perform(post("/students/v1").content(jsonStudent).contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isCreated());
     }
 
     @Test
     @Order(2)
     void should_delete_student_success() throws Exception {
-        mockMvc.perform(delete("/students/1"))
+        mockMvc.perform(delete("/students/1/v1"))
                 .andExpect(status().isOk());
     }
 
     @Test
     @Order(3)
     void should_delete_student_fail_when_give_not_exists_id() throws Exception {
-        mockMvc.perform(delete("/students/100"))
+        mockMvc.perform(delete("/students/100/v1"))
                 .andExpect(jsonPath("$.code", is(404)))
                 .andExpect(jsonPath("$.message", is("要删除的id不存在")))
                 .andExpect(status().isNotFound());

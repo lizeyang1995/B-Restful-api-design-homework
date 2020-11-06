@@ -13,14 +13,14 @@ public class StudentController {
         this.studentService = studentService;
     }
 
-    @PostMapping("students")
+    @PostMapping("students/v1")
     @ResponseStatus(HttpStatus.CREATED)
     public Student addStudent(@RequestBody Student student) {
         studentService.addStudent(student);
         return student;
     }
 
-    @DeleteMapping("students/{id}")
+    @DeleteMapping("students/{id}/v1")
     @ResponseStatus(HttpStatus.OK)
     public void deleteStudent(@PathVariable Integer id) {
         studentService.deleteStudentById(id);
