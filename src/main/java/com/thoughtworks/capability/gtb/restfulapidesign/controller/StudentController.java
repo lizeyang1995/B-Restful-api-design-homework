@@ -34,4 +34,10 @@ public class StudentController {
     public List<Student> getStudents(@RequestParam(required = false) String gender, @RequestParam(required = false) Integer id) {
         return studentService.getStudents(gender, id);
     }
+
+    @PutMapping("students/{id}/v1")
+    @ResponseStatus(HttpStatus.OK)
+    public Student modifyStudentInformation(@RequestBody Student student, @PathVariable Integer id) {
+        return null;
+    }
 }
