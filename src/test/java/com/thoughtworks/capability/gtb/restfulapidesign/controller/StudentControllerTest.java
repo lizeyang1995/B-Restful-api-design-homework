@@ -108,4 +108,13 @@ public class StudentControllerTest {
                 .andExpect(jsonPath("$[1].students", hasSize(1)))
                 .andExpect(status().isCreated());
     }
+
+    @Test
+    @Order(10)
+    void should_modify_group_name() throws Exception {
+        mockMvc.perform(patch("/students/groups/1/v1?name=Group1.1"))
+                .andExpect(jsonPath("$.name", is("Group1.1")))
+                .andExpect(jsonPath("$.id", is(1)))
+                .andExpect(status().isCreated());
+    }
 }
