@@ -9,7 +9,7 @@ import java.util.*;
 @Service
 public class StudentService {
     private Map<Integer, Student> students = new HashMap<>();
-    private Integer STUDENT_COUNTS = 0;
+    private Integer STUDENT_COUNTS = 4;
 
     public StudentService() {
         students.put(1, Student.builder().id(1).name("lizeyang1").gender("male").note("123").build());
@@ -57,5 +57,13 @@ public class StudentService {
             }
         }
         return genderStudents;
+    }
+
+    public Student modifyStudent(Student student, Integer id) {
+        Student targetStudent = students.get(id);
+        targetStudent.setName(student.getName());
+        targetStudent.setGender(student.getGender());
+        targetStudent.setNote(student.getNote());
+        return targetStudent;
     }
 }

@@ -38,6 +38,6 @@ public class StudentController {
     @PutMapping("students/{id}/v1")
     @ResponseStatus(HttpStatus.OK)
     public Student modifyStudentInformation(@RequestBody Student student, @PathVariable Integer id) {
-        return null;
+        return studentService.modifyStudent(student, id);
     }
 }
