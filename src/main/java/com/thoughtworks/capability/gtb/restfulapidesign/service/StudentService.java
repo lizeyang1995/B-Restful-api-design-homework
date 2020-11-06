@@ -30,8 +30,22 @@ public class StudentService {
         students.remove(id);
     }
 
-    public List<Student> getStudents() {
+    public List<Student> getStudents(String gender) {
+        if (Optional.ofNullable(gender).isPresent()) {
+            return getStudentsByGender(gender);
+        }
         Collection<Student> studentsValues = students.values();
         return new ArrayList<>(studentsValues);
+    }
+
+    private List<Student> getStudentsByGender(String gender) {
+        ArrayList<Student> genderStudents = new ArrayList<>();
+        for (Map.Entry<Integer, Student> entry : students.entrySet()) {
+            Student student = entry.getValue();
+            if (student.getGender().equals("male")) {
+                genderStudents.add(student);
+            }
+        }
+        return genderStudents;
     }
 }

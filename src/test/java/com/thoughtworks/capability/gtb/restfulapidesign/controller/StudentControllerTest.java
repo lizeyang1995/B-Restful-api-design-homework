@@ -7,6 +7,7 @@ import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.core.annotation.Order;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
@@ -18,10 +19,13 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @SpringBootTest
 @AutoConfigureMockMvc
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class StudentControllerTest {
     @Autowired
     MockMvc mockMvc;
+
     @Test
+    @Order(1)
     void should_add_a_student_success() throws Exception {
         Student student = Student.builder().name("lizeyang").gender("male").note("123").build();
         ObjectMapper objectMapper = new ObjectMapper();
@@ -31,12 +35,14 @@ public class StudentControllerTest {
     }
 
     @Test
+    @Order(2)
     void should_delete_student_success() throws Exception {
         mockMvc.perform(delete("/students/1/v1"))
                 .andExpect(status().isOk());
     }
 
     @Test
+    @Order(3)
     void should_delete_student_fail_when_give_not_exists_id() throws Exception {
         mockMvc.perform(delete("/students/100/v1"))
                 .andExpect(jsonPath("$.code", is(404)))
@@ -45,6 +51,7 @@ public class StudentControllerTest {
     }
 
     @Test
+    @Order(4)
     void should_get_all_student() throws Exception {
         mockMvc.perform(get("/students"))
                 .andExpect(jsonPath("$", hasSize(4)))
@@ -52,9 +59,10 @@ public class StudentControllerTest {
     }
 
     @Test
+    @Order(5)
     void should_get_all_male_student() throws Exception {
         mockMvc.perform(get("/students?gender=male"))
-                .andExpect(jsonPath("$", hasSize(2)))
+                .andExpect(jsonPath("$", hasSize(1)))
                 .andExpect(status().isOk());
     }
 }

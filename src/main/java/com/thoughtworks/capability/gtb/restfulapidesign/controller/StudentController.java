@@ -6,6 +6,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 public class StudentController {
@@ -31,6 +32,6 @@ public class StudentController {
     @GetMapping("students")
     @ResponseStatus(HttpStatus.OK)
     public List<Student> getStudents(@RequestParam(required = false) String gender) {
-        return studentService.getStudents();
+        return studentService.getStudents(gender);
     }
 }
