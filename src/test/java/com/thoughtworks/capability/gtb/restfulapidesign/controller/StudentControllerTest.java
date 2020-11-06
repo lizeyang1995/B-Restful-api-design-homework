@@ -53,7 +53,7 @@ public class StudentControllerTest {
     @Order(4)
     void should_get_all_student() throws Exception {
         mockMvc.perform(get("/students"))
-                .andExpect(jsonPath("$", hasSize(4)))
+                .andExpect(jsonPath("$", hasSize(7)))
                 .andExpect(status().isOk());
     }
 
@@ -104,6 +104,8 @@ public class StudentControllerTest {
     void should_get_all_groups() throws Exception {
         mockMvc.perform(post("/students/groups/v1"))
                 .andExpect(jsonPath("$", hasSize(6)))
+                .andExpect(jsonPath("$[0].students", hasSize(2)))
+                .andExpect(jsonPath("$[1].students", hasSize(1)))
                 .andExpect(status().isCreated());
     }
 }

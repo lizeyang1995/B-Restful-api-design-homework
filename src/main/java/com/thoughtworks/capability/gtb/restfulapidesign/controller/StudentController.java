@@ -45,6 +45,6 @@ public class StudentController {
     @PostMapping("students/groups/v1")
     @ResponseStatus(HttpStatus.CREATED)
     public List<Group> getGroups() {
-        return null;
+        return studentService.getGroups();
     }
 }
