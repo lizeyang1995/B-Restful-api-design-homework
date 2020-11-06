@@ -47,4 +47,10 @@ public class StudentController {
     public List<Group> getGroups() {
         return studentService.getGroups();
     }
+
+    @PatchMapping("students/groups/{id}/v1")
+    @ResponseStatus(HttpStatus.CREATED)
+    public Group modifyGroupInformation(@PathVariable Integer id, @RequestParam String name) {
+        return null;
+    }
 }
