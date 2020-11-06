@@ -31,6 +31,6 @@ public class StudentController {
     @GetMapping("students")
     @ResponseStatus(HttpStatus.OK)
     public List<Student> getStudents(@RequestParam(required = false) String gender) {
-        return null;
+        return studentService.getStudents();
     }
 }
